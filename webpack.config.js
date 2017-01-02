@@ -11,8 +11,12 @@ module.exports = {
       Nav: 'app/components/Nav.jsx',
       About: 'app/components/About.jsx',
       Examples: 'app/components/Examples.jsx',
-      SingleDocking: 'app/components/SingleDocking.jsx'
-      
+      PrepareLibrary : 'app/components/PrepareLibrary.jsx',
+      PrepareLibraryForm : 'app/components/PrepareLibraryForm.jsx',
+      PrepareLibraryMessage : 'app/components/PrepareLibraryMessage.jsx',
+      SingleDocking: 'app/components/SingleDocking.jsx',
+      drugdesignApi: 'app/api/drugdesignApi.jsx'
+
     },
     extensions: ['', '.js', '.jsx']
   },
