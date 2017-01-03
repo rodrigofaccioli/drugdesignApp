@@ -13,7 +13,11 @@ module.exports = {
 
     return axios.post(authServerUrl, { ligandlib: libraryName}, config)
   .then(function(response){
-    return response.data.lig_men;
+    if (response.data.error_code === "None"){
+       return response.data.lig_men;
+    }else {
+       throw new Error(response.data.error_code);  
+    }
   });
   }
 }
