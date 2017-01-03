@@ -33,7 +33,7 @@ var PrepareLibrary = React.createClass({
 
     function renderMessage () {
       if (isPreparingLib) {
-        return <h3>Prepare Library is performing...</h3>;
+        return <h3>Prepare Library is running ...</h3>;
       } else if (isLoading){
         return <h3>Prepare Library is loading...</h3>;
       }else if (libraryName) {
