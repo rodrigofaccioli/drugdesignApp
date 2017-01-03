@@ -24923,38 +24923,47 @@
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      isLoading: false
+	      isLoading: false,
+	      isPreparingLib: false
 	    };
 	  },
 	  handleSearch: function handleSearch(libraryName) {
 	    var that = this;
 
-	    this.setState({ isLoading: true });
+	    this.setState({ isLoading: true, isPreparingLib: true });
 
 	    drugdesignApi.preparelibrary(libraryName).then(function (libraryName) {
 	      that.setState({
 	        libraryName: libraryName,
 	        lig_men: lig_men,
-	        isLoading: false
+	        isLoading: false,
+	        isPreparingLib: false
 	      });
 	    }, function (errorMessage) {
-	      that.setState({ isLoading: false });
+	      that.setState({ isLoading: false, isPreparingLib: false });
 	      alert(errorMessage);
 	    });
 	  },
 	  render: function render() {
 	    var _state = this.state,
 	        isLoading = _state.isLoading,
+	        isPreparingLib = _state.isPreparingLib,
 	        libraryName = _state.libraryName,
 	        lig_men = _state.lig_men;
 
 
 	    function renderMessage() {
-	      if (isLoading) {
+	      if (isPreparingLib) {
 	        return React.createElement(
 	          'h3',
 	          null,
-	          'Prepare Library needs to be informed...'
+	          'Prepare Library is performing...'
+	        );
+	      } else if (isLoading) {
+	        return React.createElement(
+	          'h3',
+	          null,
+	          'Prepare Library is loading...'
 	        );
 	      } else if (libraryName) {
 	        return React.createElement(PrepareLibraryMessage, { libraryName: temp, message: lig_men });
@@ -25055,7 +25064,7 @@
 	var axios = __webpack_require__(224);
 	var querystring = __webpack_require__(249);
 
-	var DRUGDESIGN_URL = 'http://127.0.0.1:5000/';
+	var DRUGDESIGN_URL = 'http://127.0.0.1:8080/';
 	var config = {
 	  headers: { 'Content-Type': 'application/json' }
 	};
@@ -25066,7 +25075,7 @@
 	    var authServerUrl = DRUGDESIGN_URL + 'preparelibrary/' + encodedLibraryName;
 
 	    return axios.post(authServerUrl, { ligandlib: libraryName }, config).then(function (response) {
-	      console.log('saved successfully');
+	      return response.data;
 	    });
 	  }
 	};
