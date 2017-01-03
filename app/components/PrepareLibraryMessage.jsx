@@ -2,9 +2,9 @@ var React = require('react');
 
 var PrepareLibraryMessage = React.createClass({
   render: function () {
-    var {libraryName, mensagem} = this.props;
+    var {libraryName, ligMen} = this.props;
     return (
-      <h3>{libraryName}. {mensagem}.</h3>
+      <h3> {ligMen}</h3>
     )
   }
 });

@@ -16,10 +16,10 @@ var PrepareLibrary = React.createClass({
 
     this.setState({isLoading: true, isPreparingLib:true});
 
-    drugdesignApi.preparelibrary(libraryName).then(function (libraryName) {
+    drugdesignApi.preparelibrary(libraryName).then(function (lig_men) {
       that.setState({
       libraryName: libraryName,
-      lig_men : lig_men,
+      ligMen : lig_men,
       isLoading: false,
       isPreparingLib: false
       });
@@ -29,7 +29,7 @@ var PrepareLibrary = React.createClass({
     });
   },
   render: function () {
-    var {isLoading, isPreparingLib, libraryName, lig_men} = this.state;
+    var {isLoading, isPreparingLib, libraryName, ligMen} = this.state;
 
     function renderMessage () {
       if (isPreparingLib) {
@@ -37,7 +37,7 @@ var PrepareLibrary = React.createClass({
       } else if (isLoading){
         return <h3>Prepare Library is loading...</h3>;
       }else if (libraryName) {
-        return <PrepareLibraryMessage libraryName={temp} message={lig_men}/>;
+        return <PrepareLibraryMessage libraryName={libraryName} ligMen={ligMen}/>;
       }
     }
     return (

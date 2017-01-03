@@ -13,7 +13,7 @@ module.exports = {
 
     return axios.post(authServerUrl, { ligandlib: libraryName}, config)
   .then(function(response){
-    return response.data
+    return response.data.lig_men;
   });
   }
 }

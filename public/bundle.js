@@ -24932,10 +24932,10 @@
 
 	    this.setState({ isLoading: true, isPreparingLib: true });
 
-	    drugdesignApi.preparelibrary(libraryName).then(function (libraryName) {
+	    drugdesignApi.preparelibrary(libraryName).then(function (lig_men) {
 	      that.setState({
 	        libraryName: libraryName,
-	        lig_men: lig_men,
+	        ligMen: lig_men,
 	        isLoading: false,
 	        isPreparingLib: false
 	      });
@@ -24949,7 +24949,7 @@
 	        isLoading = _state.isLoading,
 	        isPreparingLib = _state.isPreparingLib,
 	        libraryName = _state.libraryName,
-	        lig_men = _state.lig_men;
+	        ligMen = _state.ligMen;
 
 
 	    function renderMessage() {
@@ -24957,7 +24957,7 @@
 	        return React.createElement(
 	          'h3',
 	          null,
-	          'Prepare Library is performing...'
+	          'Prepare Library is running ...'
 	        );
 	      } else if (isLoading) {
 	        return React.createElement(
@@ -24966,7 +24966,7 @@
 	          'Prepare Library is loading...'
 	        );
 	      } else if (libraryName) {
-	        return React.createElement(PrepareLibraryMessage, { libraryName: temp, message: lig_men });
+	        return React.createElement(PrepareLibraryMessage, { libraryName: libraryName, ligMen: ligMen });
 	      }
 	    }
 	    return React.createElement(
@@ -25040,15 +25040,13 @@
 	  render: function render() {
 	    var _props = this.props,
 	        libraryName = _props.libraryName,
-	        mensagem = _props.mensagem;
+	        ligMen = _props.ligMen;
 
 	    return React.createElement(
 	      'h3',
 	      null,
-	      libraryName,
-	      '. ',
-	      mensagem,
-	      '.'
+	      ' ',
+	      ligMen
 	    );
 	  }
 	});
@@ -25075,7 +25073,7 @@
 	    var authServerUrl = DRUGDESIGN_URL + 'preparelibrary/' + encodedLibraryName;
 
 	    return axios.post(authServerUrl, { ligandlib: libraryName }, config).then(function (response) {
-	      return response.data;
+	      return response.data.lig_men;
 	    });
 	  }
 	};
