@@ -24940,7 +24940,9 @@
 	        isPreparingLib: false
 	      });
 	    }, function (errorMessage) {
-	      that.setState({ isLoading: false, isPreparingLib: false });
+	      that.setState({ isLoading: false,
+	        isPreparingLib: false,
+	        ligMen: " " });
 	      alert(errorMessage);
 	    });
 	  },
@@ -25073,7 +25075,11 @@
 	    var authServerUrl = DRUGDESIGN_URL + 'preparelibrary/' + encodedLibraryName;
 
 	    return axios.post(authServerUrl, { ligandlib: libraryName }, config).then(function (response) {
-	      return response.data.lig_men;
+	      if (response.data.error_code === "None") {
+	        return response.data.lig_men;
+	      } else {
+	        throw new Error(response.data.error_code);
+	      }
 	    });
 	  }
 	};

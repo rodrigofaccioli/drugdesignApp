@@ -24,7 +24,9 @@ var PrepareLibrary = React.createClass({
       isPreparingLib: false
       });
     }, function (errorMessage) {
-      that.setState({isLoading: false, isPreparingLib: false});
+      that.setState({isLoading: false,
+        isPreparingLib: false,
+        ligMen : " "});
       alert(errorMessage);
     });
   },
